@@ -13,5 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', [App\Http\Controllers\DonationController::class, 'index'])->name('donation.index');
-Route::get('/donation', [App\Http\Controllers\DonationController::class, 'create'])->name('donation.create');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [App\Http\Controllers\DonationController::class, 'index'])->name('donation.index');
+    Route::get('/donation', [App\Http\Controllers\DonationController::class, 'create'])->name('donation.create');
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
